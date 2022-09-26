@@ -1,6 +1,7 @@
 <template>
   <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
     <h1>{{$t('content')}}</h1>
+    hhh
   </div>
 </template>
 
