@@ -1,6 +1,6 @@
 <template>
   <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
-    上海疫情
+    <router-view></router-view>
   </div>
 </template>
 
@@ -15,9 +15,9 @@
     },
     computed: {
       ...mapState('setting', ['pageMinHeight']),
-      desc() {
-        return this.$t('description')
-      }
+      // desc() {
+      //   return this.$t('pageDesc')
+      // }
     }
   }
 </script>

@@ -77,6 +77,33 @@ const options = {
               path: 'shanghai',
               name: '上海疫情',
               component: () => import('@/pages/shanghai'),
+              meta: {
+                page: {
+                  breadcrumb: ['首页', 'Dashboard', '自定义']
+                }
+              },
+              children:[
+                {
+                  path: '/topic/shanghai',
+                  name: '上海疫情',
+                  component: () => import('@/pages/shanghai/components/keyWord'),
+                  meta: {
+                    invisible: true,
+                    page: {
+                      title: '关键词详情',
+                      breadcrumb: ['首页', '话题关键词', '上海疫情']
+                    }
+                  }
+                },
+                {
+                  path:'detail',
+                  name:'话题详情',
+                  component: () => import('@/pages/shanghai/components/topicDet'),
+                  meta: {
+                    invisible: true,
+                  },
+                }
+              ]
             }
           ]
         },
