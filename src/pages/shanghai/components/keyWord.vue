@@ -1,5 +1,5 @@
 <template>
-  <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
+  <div>
       <a-row :gutter="24" >
         <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
           <a-card title="关键词话题博文热度" :bordered="false">
@@ -22,8 +22,8 @@
                   <a slot="title" :href="item.href">{{ item.title }}</a>
                   <a-avatar slot="avatar" :src="item.avatar" />
                 </a-list-item-meta>
-                <router-link to="/dashboard/guo/he">
-                  sss<a-progress :percent="50" size="small" status="active" />
+                <router-link to="/topic/shanghai/detail">
+                  #俄罗斯目前已经推进到基辅#<a-progress :percent="50" size="small" status="active" />
                 </router-link>
                 {{ item.content }}
               </a-list-item>
