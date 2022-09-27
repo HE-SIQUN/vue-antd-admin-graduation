@@ -1,5 +1,6 @@
 <template>
   <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
+    hhhh
     <router-view></router-view>
   </div>
 </template>
