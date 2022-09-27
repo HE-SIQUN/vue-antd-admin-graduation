@@ -3,7 +3,7 @@
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="@/assets/img/logo.png">
-        <h1>{{systemName}}</h1>
+        <h1 >{{systemName}}</h1>
       </router-link>
     </div>
     <i-menu :theme="theme" :collapsed="collapsed" :options="menuData" @select="onSelect" class="menu"/>

@@ -32,23 +32,23 @@ const options = {
           meta: {
             icon: 'file-ppt'
           },
-          component: () => import('@/pages/demo')
+          component: () => import('@/pages/demo/Demo')
         },
-        {
-          path: 'parent1',
-          name: '父级路由1',
-          meta: {
-            icon: 'dashboard',
-          },
-          component: BlankView,
-          children: [
-            {
-              path: 'demo1',
-              name: '演示页面1',
-              component: () => import('@/pages/demo'),
-            }
-          ]
-        },
+        // {
+        //   path: 'parent1',
+        //   name: '父级路由1',
+        //   meta: {
+        //     icon: 'dashboard',
+        //   },
+        //   component: BlankView,
+        //   children: [
+        //     {
+        //       path: 'demo1',
+        //       name: '演示页面1',
+        //       component: () => import('@/pages/demo'),
+        //     }
+        //   ]
+        // },
         {
           path: 'parent2',
           name: '父级路由2',
@@ -60,7 +60,23 @@ const options = {
             {
               path: 'demo2',
               name: '演示页面2',
-              component: () => import('@/pages/demo'),
+              component: () => import('@/pages/demo/Demo'),
+            }
+          ]
+        },
+        //  远期规划是做成动态路由
+        {
+          path: 'topic',
+          name: '话题关键词',
+          meta: {
+            icon: 'form'
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'shanghai',
+              name: '上海疫情',
+              component: () => import('@/pages/shanghai'),
             }
           ]
         },
@@ -98,7 +114,7 @@ const options = {
               permission: 'form',
               role: 'manager'
             },
-            component: () => import('@/pages/demo')
+            component: () => import('@/pages/demo/Demo')
           }
         }
       ]
