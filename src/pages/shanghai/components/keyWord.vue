@@ -3,31 +3,39 @@
       <a-row :gutter="24" >
         <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
           <a-card title="关键词话题博文热度列表" :bordered="false">
-            <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
-<!--              <div slot="footer"><b>ant design vue</b> footer part</div>-->
-              <a-list-item slot="renderItem" key="item.title" slot-scope="item">
-                <template v-for="{ type, text } in actions" slot="actions">
-                <span :key="type">
-                  <a-icon :type="type" style="margin-right: 8px" />
-                  {{ text }}
-                </span>
-                </template>
-                <img
-                    slot="extra"
-                    width="272"
-                    alt="logo"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
-                <a-list-item-meta :description="item.description">
-                  <a slot="title" :href="item.href">{{ item.title }}</a>
-                  <a-avatar slot="avatar" :src="item.avatar" />
-                </a-list-item-meta>
-                <router-link to="/topic/shanghai/detail">
-                  #俄罗斯目前已经推进到基辅#<a-progress :percent="50" size="small" status="active" />
+<!--            v-for="(item,index) in listDataForm" :key="index"-->
+              <div class="list-item-keyword" >
+                <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                  #上海市新冠肺炎疫情防控新闻发布会#
                 </router-link>
-                {{ item.content }}
-              </a-list-item>
-            </a-list>
+                <a-progress :percent="50" size="small" status="active" />
+              </div>
+            <div class="list-item-keyword" >
+              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                #上海处于把疫情围住捞干阶段#
+              </router-link>
+              <a-progress :percent="50" size="small" status="active" />
+            </div>
+            <div class="list-item-keyword" >
+              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                #上海疫情正处于快速上升阶段#
+              </router-link>
+              <a-progress :percent="50" size="small" status="active" />
+            </div>
+            <div class="list-item-keyword" >
+              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                #上海六院疫情#
+              </router-link>
+              <a-progress :percent="50" size="small" status="active" />
+            </div>
+            <div class="list-item-keyword" >
+              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                #上海疫情求助#
+              </router-link>
+              <a-progress :percent="50" size="small" status="active" />
+            </div>
+
+
           </a-card>
         </a-col>
         <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
@@ -79,7 +87,19 @@ export default {
         { type: 'star-o', text: '156' },
         { type: 'like-o', text: '156' },
         { type: 'message', text: '2' }
-      ]
+      ],
+      listDataForm:[
+        "#上海市新冠肺炎疫情防控新闻发布会#",
+        "#上海疫情正处于快速上升阶段#",
+        "#上海六院疫情#",
+        "#上海疫情求助#",
+        "#专家称上海这次疫情规模比武汉大#",
+        "#上海交大疫情#",
+        "#上海对因疫情致基本生活困难群众加强救助#",
+        "#上海疫情防控工作发布会#",
+        "#上海处于把疫情围住捞干阶段#",
+        "#上海此次ktv疫情在沪密接2.3万人#",
+  ]
     }
   },
   methods:{
@@ -117,4 +137,8 @@ export default {
 
 <style scoped lang="less">
 @import "../index.less";
+.list-item-keyword{
+  display: flex;
+  justify-content: space-between;
+}
 </style>

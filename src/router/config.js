@@ -1,5 +1,5 @@
 import TabsView from '@/layouts/tabs/TabsView'
-// import BlankView from '@/layouts/BlankView'
+import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
 
 // 路由配置
@@ -26,44 +26,44 @@ const options = {
       component: TabsView,
       redirect: '/login',
       children: [
-        // {
-        //   path: 'demo',
-        //   name: '演示页',
-        //   meta: {
-        //     icon: 'file-ppt'
-        //   },
-        //   component: () => import('@/pages/shanghai/components/keyWord')
-        // },
-        // {
-        //   path: 'parent1',
-        //   name: '父级路由1',
-        //   meta: {
-        //     icon: 'dashboard',
-        //   },
-        //   component: BlankView,
-        //   children: [
-        //     {
-        //       path: 'demo1',
-        //       name: '演示页面1',
-        //       component: () => import('@/pages/demo'),
-        //     }
-        //   ]
-        // },
-        // {
-        //   path: 'parent2',
-        //   name: '父级路由2',
-        //   meta: {
-        //     icon: 'form'
-        //   },
-        //   component: PageView,
-        //   children: [
-        //     {
-        //       path: 'demo2',
-        //       name: '演示页面2',
-        //       component: () => import('@/pages/demo/Demo'),
-        //     }
-        //   ]
-        // },
+        {
+          path: 'demo',
+          name: '演示页',
+          meta: {
+            icon: 'file-ppt'
+          },
+          component: () => import('@/pages/shanghai/components/keyWord')
+        },
+        {
+          path: 'parent1',
+          name: '父级路由1',
+          meta: {
+            icon: 'dashboard',
+          },
+          component: BlankView,
+          children: [
+            {
+              path: 'demo1',
+              name: '演示页面1',
+              component: () => import('@/pages/demo'),
+            }
+          ]
+        },
+        {
+          path: 'parent2',
+          name: '父级路由2',
+          meta: {
+            icon: 'form'
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'demo2',
+              name: '演示页面2',
+              component: () => import('@/pages/demo/Demo'),
+            }
+          ]
+        },
         //  远期规划是做成动态路由
         {
           path: 'topic',
