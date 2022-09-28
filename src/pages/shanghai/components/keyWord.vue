@@ -4,7 +4,7 @@
         <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
           <a-card title="关键词话题博文热度" :bordered="false">
             <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
-              <div slot="footer"><b>ant design vue</b> footer part</div>
+<!--              <div slot="footer"><b>ant design vue</b> footer part</div>-->
               <a-list-item slot="renderItem" key="item.title" slot-scope="item">
                 <template v-for="{ type, text } in actions" slot="actions">
                 <span :key="type">

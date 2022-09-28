@@ -49,21 +49,21 @@ const options = {
         //     }
         //   ]
         // },
-        {
-          path: 'parent2',
-          name: '父级路由2',
-          meta: {
-            icon: 'form'
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'demo2',
-              name: '演示页面2',
-              component: () => import('@/pages/demo/Demo'),
-            }
-          ]
-        },
+        // {
+        //   path: 'parent2',
+        //   name: '父级路由2',
+        //   meta: {
+        //     icon: 'form'
+        //   },
+        //   component: PageView,
+        //   children: [
+        //     {
+        //       path: 'demo2',
+        //       name: '演示页面2',
+        //       component: () => import('@/pages/demo/Demo'),
+        //     }
+        //   ]
+        // },
         //  远期规划是做成动态路由
         {
           path: 'topic',
@@ -99,6 +99,14 @@ const options = {
                   path:'detail',
                   name:'话题详情',
                   component: () => import('@/pages/shanghai/components/topicDet'),
+                  meta: {
+                    invisible: true,
+                  },
+                },
+                {
+                  path:'weiboPage',
+                  name:'微博详情',
+                  component: () => import('@/pages/shanghai/components/weiboDet'),
                   meta: {
                     invisible: true,
                   },
