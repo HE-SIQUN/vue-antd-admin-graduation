@@ -90,7 +90,7 @@ const options = {
                   meta: {
                     invisible: true,
                     page: {
-                      title: '关键词详情',
+                      title: '“上海疫情”详情',
                       breadcrumb: ['首页', '话题关键词', '上海疫情']
                     }
                   }
