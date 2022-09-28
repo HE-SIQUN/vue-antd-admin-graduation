@@ -37,7 +37,7 @@
         </a-col>
         <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
           <a-card title="话题时间热度" :bordered="false">
-            <p>左侧第二部分</p>
+            <div id="line-container"></div>
           </a-card>
         </a-col>
         <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
@@ -63,6 +63,7 @@ for (let i = 0; i < 23; i++) {
   })
 }
 import {mapState} from 'vuex'
+import { Line } from '@antv/g2plot';
 export default {
   name: 'TopicDetail',
   data() {
@@ -81,9 +82,35 @@ export default {
       ]
     }
   },
+  methods:{
+    test(){
+      fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
+          .then((res) => res.json())
+          .then((data) => {
+            const line = new Line('line-container', {
+              data,
+              padding: 'auto',
+              xField: 'Date',
+              yField: 'scales',
+              xAxis: {
+                tickCount: 5,
+              },
+              slider: {
+                start: 0.1,
+                end: 0.5,
+              },
+            });
+
+            line.render();
+          })
+    }
+  },
   computed: {
     ...mapState('setting', ['pageMinHeight']),
 
+  },
+  mounted() {
+    this.test()
   }
 }
 </script>
