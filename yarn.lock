@@ -197,12 +197,7 @@
   resolved "https://registry.npm.taobao.org/@antv/g2-brush/download/@antv/g2-brush-0.0.2.tgz#0b65f3ebbf82690202913d0b6759ab2900faa841"
   integrity sha1-C2Xz67+CaQICkT0LZ1mrKQD6qEE=
 
-"@antv/g2-plugin-slider@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/@antv/g2-plugin-slider/download/@antv/g2-plugin-slider-2.1.1.tgz#c20c5f1cf085bea478f8ab1fc84837e45c46a065"
-  integrity sha1-wgxfHPCFvqR4+KsfyEg35FxGoGU=
-
-"@antv/g2-plugin-slider@^2.1.1":
+"@antv/g2-plugin-slider@^2.1.0", "@antv/g2-plugin-slider@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npmmirror.com/@antv/g2-plugin-slider/-/g2-plugin-slider-2.1.1.tgz#c20c5f1cf085bea478f8ab1fc84837e45c46a065"
   integrity sha512-nB678VEGG3FkrvkDDFADAKjLQIeXzITEYqey5oeOpbf0vT5jOa55lQDyJDZ79cK8PmU/Hz6VPeSb3CNQBA+/FQ==

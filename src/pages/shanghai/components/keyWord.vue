@@ -40,7 +40,7 @@
         </a-col>
         <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
           <a-card title="话题关键词词云" :bordered="false">
-            <p>右侧第一部分</p>
+            <div id="chart-cloud"></div>
           </a-card>
         </a-col>
         <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
@@ -71,7 +71,7 @@ for (let i = 0; i < 23; i++) {
   })
 }
 import {mapState} from 'vuex'
-import { Line } from '@antv/g2plot';
+import { Line ,WordCloud} from '@antv/g2plot';
 export default {
   name: 'TopicDetail',
   data() {
@@ -123,6 +123,25 @@ export default {
 
             line.render();
           })
+    },
+    cloud(){
+      fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json')
+          .then((res) => res.json())
+          .then((data) => {
+            const wordCloud = new WordCloud('chart-cloud', {
+              data,
+              wordField: 'name',
+              weightField: 'value',
+              colorField: 'value',
+              imageMask: 'https://gw.alipayobjects.com/mdn/rms_2274c3/afts/img/A*07tdTIOmvlYAAAAAAAAAAABkARQnAQ',
+              wordStyle: {
+                fontFamily: 'Verdana',
+                fontSize: [8, 32],
+              },
+            });
+
+            wordCloud.render();
+          })
     }
   },
   computed: {
@@ -131,6 +150,7 @@ export default {
   },
   mounted() {
     this.test()
+    this.cloud()
   }
 }
 </script>
