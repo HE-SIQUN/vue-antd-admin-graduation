@@ -28,16 +28,18 @@
       </a-card>
     </a-col>
     <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
-      <a-card title="话题下发博人地理信息地图展示" :bordered="false">
+      <a-card title="话题下发博人地理信息地图展示" :bordered="false" :style="{ marginBottom: '24px' }">
 <!--        <p>地图实例</p>-->
         <div id="map-container" style="min-height: 500px; justify-content: center;position: relative">
         </div>
       </a-card>
-    </a-col>
-    <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
       <a-card title="话题内知识图谱" :bordered="false">
         <p>底部图谱的展示区域</p>
+        <div id="graph-container" style="min-height: 300px; justify-content: center;position: relative"></div>
       </a-card>
+    </a-col>
+    <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
+
     </a-col>
     </a-row>
   </div>
@@ -58,6 +60,7 @@ for (let i = 0; i < 23; i++) {
 }
 import { Dot} from '@antv/l7plot'
 import {mapState} from 'vuex'
+import G6 from '@antv/g6';
 export default {
   name: 'TopicDetail',
   data() {
@@ -120,6 +123,59 @@ export default {
               },
             });
           });
+    },
+    graphCreate(){
+      const data = {
+        nodes: [
+          {
+            id: 'node1',
+            label: 'Circle1',
+            x: 150,
+            y: 150,
+          },
+          {
+            id: 'node2',
+            label: 'Circle2',
+            x: 400,
+            y: 150,
+          },
+        ],
+        edges: [
+          {
+            source: 'node1',
+            target: 'node2',
+          },
+        ],
+      };
+
+      const graph = new G6.Graph({
+        container: 'graph-container',
+        width: 500,
+        height: 500,
+        defaultNode: {
+          type: 'circle',
+          size: [100],
+          color: '#5B8FF9',
+          style: {
+            fill: '#9EC9FF',
+            lineWidth: 3,
+          },
+          labelCfg: {
+            style: {
+              fill: '#fff',
+              fontSize: 20,
+            },
+          },
+        },
+        defaultEdge: {
+          style: {
+            stroke: '#e2e2e2',
+          },
+        },
+      });
+
+      graph.data(data);
+      graph.render();
     }
 
   },
@@ -128,6 +184,7 @@ export default {
   },
   mounted() {
     this.mapCreate()
+    this.graphCreate()
   }
 }
 </script>
