@@ -1,44 +1,25 @@
 <template>
   <div>
       <a-row :gutter="24" >
-        <a-col :sm="24" :md="24" :xl="16" :style="{ marginBottom: '24px' }">
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px',height:'508px' }">
           <a-card title="关键词话题博文热度列表" :bordered="false">
 <!--            v-for="(item,index) in listDataForm" :key="index"-->
-              <div class="list-item-keyword" >
+              <div class="list-item-keyword" v-for="(item,index) in listDataForm" :key="index">
                 <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
-                  #上海市新冠肺炎疫情防控新闻发布会#
+                  <span>{{item.content}}</span>
                 </router-link>
-                <a-progress :percent="50" size="small" status="active" />
+                <div class="progress-style">
+                  <a-progress :percent="50" size="small" status="active" />
+                </div>
               </div>
-            <div class="list-item-keyword" >
-              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
-                #上海处于把疫情围住捞干阶段#
-              </router-link>
-              <a-progress :percent="50" size="small" status="active" />
+            <!--分页区域-->
+            <div :style="{float:'right',paddingTop:'24px'}">
+              <a-pagination v-model="current" :total="listDataForm.length" show-less-items @change="changePage"/>
             </div>
-            <div class="list-item-keyword" >
-              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
-                #上海疫情正处于快速上升阶段#
-              </router-link>
-              <a-progress :percent="50" size="small" status="active" />
-            </div>
-            <div class="list-item-keyword" >
-              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
-                #上海六院疫情#
-              </router-link>
-              <a-progress :percent="50" size="small" status="active" />
-            </div>
-            <div class="list-item-keyword" >
-              <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
-                #上海疫情求助#
-              </router-link>
-              <a-progress :percent="50" size="small" status="active" />
-            </div>
-
-
           </a-card>
         </a-col>
-        <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
+<!--        右边-->
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px',height:'500px'}">
           <a-card title="话题关键词词云" :bordered="false">
             <div id="chart-cloud"></div>
           </a-card>
@@ -77,29 +58,25 @@ export default {
   data() {
     return {
       listData,
-      pagination: {
-        onChange: page => {
-          console.log(page)
-        },
-        pageSize: 3
-      },
-      actions: [
-        { type: 'star-o', text: '156' },
-        { type: 'like-o', text: '156' },
-        { type: 'message', text: '2' }
-      ],
+      current: 2,
       listDataForm:[
-        "#上海市新冠肺炎疫情防控新闻发布会#",
-        "#上海疫情正处于快速上升阶段#",
-        "#上海六院疫情#",
-        "#上海疫情求助#",
-        "#专家称上海这次疫情规模比武汉大#",
-        "#上海交大疫情#",
-        "#上海对因疫情致基本生活困难群众加强救助#",
-        "#上海疫情防控工作发布会#",
-        "#上海处于把疫情围住捞干阶段#",
-        "#上海此次ktv疫情在沪密接2.3万人#",
-  ]
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海疫情正处于快速上升阶段#"},
+        {content:"#上海六院疫情#"},
+        {content:"#上海疫情求助#"},
+        {content:"#专家称上海这次疫情规模比武汉大#"},
+        {content:"#上海交大疫情#"},
+        {content:"#上海对因疫情致基本生活困难群众加强救助#"},
+        {content:"#上海疫情防控工作发布会#"},
+        {content:"#上海处于把疫情围住捞干阶段#"},
+        {content:"#上海此次ktv疫情在沪密接2.3万人#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+  ],
+      pageSize:0
     }
   },
   methods:{
@@ -142,6 +119,12 @@ export default {
 
             wordCloud.render();
           })
+    },
+    changePage(page){
+      console.log(page)
+      // if(page===1){
+      //
+      // }
     }
   },
   computed: {
@@ -160,5 +143,8 @@ export default {
 .list-item-keyword{
   display: flex;
   justify-content: space-between;
+}
+.progress-style{
+  width: 200px;
 }
 </style>
