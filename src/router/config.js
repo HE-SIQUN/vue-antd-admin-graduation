@@ -28,11 +28,11 @@ const options = {
       children: [
         {
           path: 'demo',
-          name: '演示页',
+          name: '展示首页',
           meta: {
             icon: 'file-ppt'
           },
-          component: () => import('@/pages/shanghai/components/keyWord')
+          component: () => import('@/pages/demo/Demo')
         },
         {
           path: 'parent1',
