@@ -17,6 +17,7 @@ module.exports = {
   multiPage: false,                     //多页签模式，true:开启，false:不开启
   cachePage: true,                      //是否缓存页面数据，仅多页签模式下生效，true 缓存, false 不缓存
   hideSetting: false,                   //隐藏设置抽屉，true:隐藏，false:不隐藏
+  // systemName: '中文国际组织使用动态监测',    //救急
   systemName: '时空大数据微博话题分析系统',         //系统名称
   copyright: '中国传媒大学_何思群',     //copyright
   asyncRoutes: false,                   //异步加载路由，true:开启，false:不开启
