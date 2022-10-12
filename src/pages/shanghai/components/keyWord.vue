@@ -1,11 +1,11 @@
 <template>
   <div>
       <a-row :gutter="24" >
-        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px',height:'508px' }">
-          <a-card title="关键词话题博文热度列表" :bordered="false">
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
+          <a-card title="关键词话题博文热度列表" :bordered="false" :style="{height:'500px'}">
 <!--            v-for="(item,index) in listDataForm" :key="index"-->
               <div class="list-item-keyword" v-for="(item,index) in listDataForm" :key="index">
-                <router-link to="/topic/shanghai/detail" :style="{fontsize:'15px'}" >
+                <router-link to="/incident/shanghai/detail" :style="{fontsize:'15px'}" >
                   <span>{{item.content}}</span>
                 </router-link>
                 <div class="progress-style">
@@ -19,8 +19,8 @@
           </a-card>
         </a-col>
 <!--        右边-->
-        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px',height:'500px'}">
-          <a-card title="话题关键词词云" :bordered="false">
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
+          <a-card title="话题关键词词云" :bordered="false" :style="{height:'500px'}">
             <div id="chart-cloud"></div>
           </a-card>
         </a-col>

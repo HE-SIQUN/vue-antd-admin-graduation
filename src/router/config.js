@@ -40,8 +40,8 @@ const options = {
 
         //  远期规划是做成动态路由
         {
-          path: 'topic',
-          name: '话题关键词',
+          path: 'incident',
+          name: '事件总览',
           meta: {
             icon: 'form',
           },
@@ -52,13 +52,10 @@ const options = {
               name: '上海疫情',
               component: () => import('@/pages/shanghai'),
               meta: {
-                page: {
-                  breadcrumb: ['首页', 'Dashboard', '自定义']
-                }
               },
               children:[
                 {
-                  path: '/topic/shanghai',
+                  path: '/incident/shanghai',
                   name: '上海疫情',
                   component: () => import('@/pages/shanghai/components/keyWord'),
                   meta: {
@@ -174,24 +171,79 @@ const options = {
             }
           ]
         },
+        // {
+        //   path: 'parent1',
+        //   name: '时间选择模块',
+        //   meta: {
+        //     icon: 'dashboard',
+        //   },
+        //   component: PageView,
+        //   children: [
+        //     {
+        //       path: 'demo1',
+        //       name: '时间相关信息',
+        //       component: () => import('@/pages/time/index'),
+        //     }
+        //   ]
+        // },
         {
-          path: 'parent1',
-          name: '时间选择模块',
+          path: 'keyword',
+          name: '事件关键词地理信息可视化',
           meta: {
-            icon: 'dashboard',
+            icon: 'form'
           },
           component: PageView,
           children: [
             {
-              path: 'demo1',
-              name: '时间相关信息',
-              component: () => import('@/pages/time/index'),
+              path: 'hotIPage',
+              name: '舆情热力图',
+              component: () => import('@/pages/loaction/index'),
+            },
+            {
+              path: 'hotLPage',
+              name: '舆情事件热度趋势',
+              component: () => import('@/pages/loaction/index'),
             }
           ]
         },
         {
+          path: 'topicI',
+          name: '话题地理信息可视化',
+          meta: {
+            icon: 'form'
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'lean',
+              name: '话题下微博情感倾向分析图',
+              component: () => import('@/pages/loaction/index'),
+            },
+            {
+              path: 'distribute',
+              name: '话题下发博人分布图',
+              component: () => import('@/pages/loaction/index'),
+            }
+          ]
+        },
+        {
+          path: 'context',
+          name: '博文地理信息可视化',
+          meta: {
+            icon: 'form'
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'repostImage',
+              name: '微博转发时序图',
+              component: () => import('@/pages/loaction/index'),
+            },
+          ]
+        },
+        {
           path: 'parent2',
-          name: '地理位置选择模块',
+          name: '时空信息综合选择模块',
           meta: {
             icon: 'form'
           },
@@ -201,24 +253,30 @@ const options = {
               path: 'demo2',
               name: '地理位置相关信息',
               component: () => import('@/pages/loaction/index'),
-            }
-          ]
-        },
-        {
-          path: 'parent3',
-          name: '添加新的关键词',
-          meta: {
-            icon: 'form'
-          },
-          component: PageView,
-          children: [
+            },
             {
-              path: 'demo2',
-              name: '数据添加页',
-              component: () => import('@/pages/add/index'),
-            }
+              path: 'demo3',
+              name: '时间位置相关信息',
+              component: () => import('@/pages/loaction/index'),
+            },
           ]
         },
+        // {
+        //   path: 'parent3',
+        //   name: '添加新的关键词',
+        //   meta: {
+        //     icon: 'form'
+        //   },
+        //   component: PageView,
+        //   children: [
+        //     {
+        //       path: 'demo2',
+        //       name: '数据添加页',
+        //       component: () => import('@/pages/add/index'),
+        //     }
+        //   ]
+        // },
+
         // {
         //   path: 'exception',
         //   name: '异常页',

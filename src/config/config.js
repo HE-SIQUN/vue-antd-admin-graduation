@@ -9,9 +9,7 @@ module.exports = {
   },
   multiPage: true,
   animate: {
-    disabled: false,
-    name: 'roll',
-    direction: 'default'
+    name: 'lightSpeed',
+    direction: 'left'
   }
 }
-

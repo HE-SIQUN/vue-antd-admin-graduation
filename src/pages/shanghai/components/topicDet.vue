@@ -22,7 +22,7 @@
 <!--                          <a slot="title" :href="item.href">{{ item.title }}</a>-->
 <!--                          <a-avatar slot="avatar" :src="item.avatar" />-->
 <!--                        </a-list-item-meta>-->
-                        <router-link to="/topic/shanghai/weiboPage">#上海市新冠肺炎疫情防控新闻发布会#</router-link>{{ item.content }}
+                        <router-link to="/incident/shanghai/weiboPage">#上海市新冠肺炎疫情防控新闻发布会#</router-link>{{item.content }}
                       </a-list-item>
                     </a-list>
       </a-card>
