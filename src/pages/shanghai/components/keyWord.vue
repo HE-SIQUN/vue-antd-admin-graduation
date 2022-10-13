@@ -27,7 +27,7 @@
       </a-row>
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
-        <a-card title="话题时间热度" :bordered="false">
+        <a-card title="事件热度趋势" :bordered="false">
           <div id="line-container"></div>
         </a-card>
       </a-col>
