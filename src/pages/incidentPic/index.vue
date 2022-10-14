@@ -2,10 +2,10 @@
   <div class="first-container" :style="`min-height: ${pageMinHeight}px`">
     <a-card>
       <a-row :gutter="24" class="first-row">
-        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px', }">
+        <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px', }">
             <h2>请选择时间查看对应的热力图</h2>
         </a-col>
-        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px', }">
+        <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
           <div>
             <a-date-picker
                 v-model="startValue"
@@ -29,7 +29,7 @@
       </a-row>
       <a-row :gutter="24" >
         <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px', }">
-          <div id="space-container-total" style="min-height: 1000px"></div>
+          <div id="space-container-total" style="min-height: 700px"></div>
         </a-col>
       </a-row>
     </a-card>
@@ -124,9 +124,10 @@ export default {
 <style scoped lang="less">
 .first-container{
   .first-row{
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    left: 10%;
+    //display: flex;
+    //justify-content: center;
+    //text-align: center;
   }
 }
 </style>
