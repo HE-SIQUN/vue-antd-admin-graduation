@@ -65,7 +65,7 @@ for (let i = 0; i < 23; i++) {
 }
 import {mapState} from 'vuex'
 import { Line ,WordCloud} from '@antv/g2plot';
-import { Dot } from '@antv/l7plot';
+import { Heatmap } from '@antv/l7plot';
 export default {
   name: 'TopicDetail',
   data() {
@@ -140,57 +140,30 @@ export default {
       // }
     },
     spaceMap(){
-      fetch('https://gw.alipayobjects.com/os/antfincdn/UvXSmhbwQx/zhongguochengshirenkoushuliangjiGDPpaihang.json')
+      fetch('https://gw.alipayobjects.com/os/antfincdn/OOSGL1vhp3/20200726024229.json')
           .then((response) => response.json())
           .then((data) => {
-            const colors = [
-              'rgba(254,255,198,0.95)',
-              'rgba(255,238,149,0.95)',
-              'rgba(255,217,99,0.95)',
-              'rgba(255,175,43,0.95)',
-              'rgba(255,135,24,0.95)',
-              'rgba(234,10,0,0.95)',
-              'rgba(195,0,0,0.95)',
-              'rgba(139,0,0,0.95)',
-            ];
-
-            new Dot('space-container', {
+            new Heatmap('space-container', {
               map: {
                 type: 'amap',
                 style: 'dark',
-                center: [102.601, 37.32],
-                zoom: 3,
+                center: [107.5671666579043, 36.445038892195569],
+                zoom: 2.932456779444394,
                 pitch: 0,
               },
               source: {
                 data: data,
-                parser: { type: 'geojson' },
-              },
-              color: {
-                field: 'PerCapitaGDP',
-                value: ({ PerCapitaGDP }) => {
-                  const index = Math.min(7, ~~(PerCapitaGDP / 10000));
-                  return colors[index];
+                parser: {
+                  type: 'geojson',
                 },
               },
+              shape: 'heatmap',
               size: {
-                field: 'population',
-                value: ({ population }) => population / 80,
+                field: 'avg',
+                value: ({ avg }) => avg / 100,
               },
-              style: {
-                opacity: 1,
-                strokeWidth: 0,
-              },
-              state: { active: { color: '#1EA7FD' } },
-              tooltip: {
-                items: [
-                  { field: '名称', alias: '名称' },
-                  { field: 'PerCapitaGDP', alias: '人均GDP' },
-                  { field: 'population', alias: '人口' },
-                ],
-              },
-              zoom: {
-                position: 'bottomright',
+              legend: {
+                position: 'bottomleft',
               },
             });
           });

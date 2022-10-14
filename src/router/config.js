@@ -197,12 +197,12 @@ const options = {
             {
               path: 'hotIPage',
               name: '舆情热力图',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/incidentPic/index'),
             },
             {
               path: 'hotLPage',
               name: '舆情事件热度趋势',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/incidentPic/line/index'),
             }
           ]
         },
@@ -217,12 +217,12 @@ const options = {
             {
               path: 'lean',
               name: '话题下微博情感倾向分析图',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/topicPic/index'),
             },
             {
               path: 'distribute',
               name: '话题下发博人分布图',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/location/index'),
             }
           ]
         },
@@ -237,7 +237,7 @@ const options = {
             {
               path: 'repostImage',
               name: '微博转发时序图',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/weiboPic/index'),
             },
           ]
         },
@@ -252,12 +252,12 @@ const options = {
             {
               path: 'demo2',
               name: '地理位置相关信息',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/location/index'),
             },
             {
               path: 'demo3',
               name: '时间位置相关信息',
-              component: () => import('@/pages/loaction/index'),
+              component: () => import('@/pages/time/index'),
             },
           ]
         },

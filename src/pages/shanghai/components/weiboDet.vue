@@ -43,7 +43,7 @@
         </a-card>
       </a-col>
       <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
-        <a-card title="转发地图" :bordered="false">
+        <a-card title="微博博文一级转发地图示意图" :bordered="false">
 <!--          <p>转发地图展示区域</p>-->
           <div id="map123" style="min-height: 500px; justify-content: center;position: relative"></div>
         </a-card>
