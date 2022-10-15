@@ -26,26 +26,23 @@
         </a-col>
       </a-row>
     <a-row :gutter="24" >
-      <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
+      <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
         <a-card title="事件热度趋势" :bordered="false">
           <div id="line-container"></div>
         </a-card>
       </a-col>
-<!--      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">-->
-<!--        <a-card title="话题用户评析" :bordered="false">-->
-<!--          <p>card content</p>-->
-<!--        </a-card>-->
-<!--      </a-col>-->
-    </a-row>
-    <a-row :gutter="24">
-      <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px'}">
+      <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
         <a-card title="事件分布热度" :bordered="false">
           <div id="space-container" style="min-height: 550px">
           </div>
         </a-card>
 
       </a-col>
-
+<!--      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">-->
+<!--        <a-card title="话题用户评析" :bordered="false">-->
+<!--          <p>card content</p>-->
+<!--        </a-card>-->
+<!--      </a-col>-->
     </a-row>
   </div>
 </template>
@@ -146,7 +143,7 @@ export default {
             new Heatmap('space-container', {
               map: {
                 type: 'amap',
-                style: 'dark',
+                style: 'light',
                 center: [107.5671666579043, 36.445038892195569],
                 zoom: 2.932456779444394,
                 pitch: 0,

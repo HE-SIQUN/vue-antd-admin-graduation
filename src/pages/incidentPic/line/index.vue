@@ -3,7 +3,23 @@
     <a-card class="inner-container">
       <a-row :gutter="24" class="first-row">
         <a-col :sm="24" :md="24" :xl="24">
-          <div class="title">事件热度走势({{title}})</div>
+          <h1 class="title">事件热度走势({{title}})</h1>
+        </a-col>
+      </a-row>
+      <a-row :gutter="24" class="second-row">
+        <a-col :sm="24" :md="24" :xl="12">
+          <h2>请选择相关事件的热度趋势</h2>
+        </a-col>
+        <a-col :sm="24" :md="24" :xl="12">
+          <a-cascader
+              :options="options"
+              :default-value="['上海疫情', '#上海疫情发布会#']"
+              @change="onChange"
+          />
+        </a-col>
+      </a-row>
+      <a-row :gutter="24" class="third-row">
+        <a-col :sm="24" :md="24" :xl="24">
           <div id="line-container" :style="{minHeight:'500px'}"></div>
         </a-col>
       </a-row>
@@ -19,7 +35,29 @@ export default {
   name: 'Demo',
   data() {
     return {
-      title:'上海疫情'
+      title:'上海疫情',
+      options: [
+        {
+          value: '上海疫情',
+          label: '上海疫情',
+          children: [
+            {
+              value: '#上海疫情发布会#',
+              label: '#上海疫情发布会#',
+            },
+          ],
+        },
+        {
+          value: '俄乌冲突',
+          label: '俄乌冲突',
+          children: [
+            {
+              value: '#俄乌冲突已进行到第三天#',
+              label: '#俄乌冲突已进行到第三天#',
+            },
+          ],
+        },
+      ],
     }
   },
   watch: {
@@ -48,7 +86,9 @@ export default {
             line.render();
           })
     },
-
+    onChange(value) {
+      console.log(value);
+    }
   },
   computed: {
     ...mapState('setting', ['pageMinHeight']),
@@ -66,12 +106,15 @@ export default {
   //justify-content: center;
   //align-items: center;
   .inner-container{
-    margin-top: 100px;
+    margin-top: 60px;
     text-align: center;
     min-height: 500px;
     //min-width: 10rem;
     .title{
-      font-size: 20px;
+      font-size: 30px;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color:#3eaf7c;
       margin: 0 0 20px 0;
     }
   }

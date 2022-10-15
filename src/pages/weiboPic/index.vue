@@ -1,18 +1,31 @@
 <template>
   <div class="first-container" :style="`min-height: ${pageMinHeight}px`">
+    <a-card>
+      <a-row :gutter="24" >
+        <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px', }">
+          <span class="introduce-part">转发时序图(基于三个重要转发节点时间顺序排列)</span>
+        </a-col>
+      </a-row>
+      <a-row :gutter="24" class="first-row">
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px', }">
+          <h2>请先选择微博查看对应的转发传播情况</h2>
+        </a-col>
+        <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px', }">
+          <a-cascader
+              :options="options"
+              :default-value="['上海疫情', '#上海疫情发布会#']"
+              @change="onChange"
+          />
+        </a-col>
+      </a-row>
+      <a-row  type="flex" justify="center">
+        <a-col :span="16">
+          <div id="myChart" :style="{ width: '1000px', height: '1000px'}"></div>
+        </a-col>
+      </a-row>
+    </a-card>
 
-    <a-row :gutter="24" >
-      <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px', }">
-        <a-card class="introduce-part" :loading="loading" bordered >
-          <span>转发时序图(基于三个重要转发节点时间顺序排列)</span>
-        </a-card>
-      </a-col>
-    </a-row>
-    <a-row :gutter="24" >
-      <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px', }">
-        <div id="myChart" :style="{ width: '1000px', height: '1000px' }"></div>
-      </a-col>
-    </a-row>
+
   </div>
 </template>
 <script>
@@ -178,7 +191,28 @@ export default {
   name:'topicPic',
   data(){
     return{
-
+      options: [
+        {
+          value: '上海疫情',
+          label: '上海疫情',
+          children: [
+            {
+              value: '#上海疫情发布会#',
+              label: '#上海疫情发布会#',
+            },
+          ],
+        },
+        {
+          value: '俄乌冲突',
+          label: '俄乌冲突',
+          children: [
+            {
+              value: '#俄乌冲突已进行到第三天#',
+              label: '#俄乌冲突已进行到第三天#',
+            },
+          ],
+        },
+      ]
     }
   },
   methods:{
@@ -194,7 +228,7 @@ export default {
 
       resizeMyChartContainer();
       var myChart = this.$echarts.init(myChartcontainer)
-      const year = ["一级转发点(长春：2022年7月1日)", "二级转发点", "三级转发点"];
+      const year = ["一级转发点", "二级转发点", "三级转发点"];
       const mapData = [
         [],
         [],
@@ -410,8 +444,8 @@ export default {
               [{
                 text: '转发时序图',
                 subtext: '基于三个重要的转发节点',
-                left: '15%',
-                top: '15%',
+                left: '5%',
+                top: '5%',
                 textStyle: {
                   color: '#fff',
                   fontSize: 25
@@ -603,7 +637,10 @@ export default {
       }
       console.log(optionXyMap01)
       myChart.setOption(optionXyMap01);
-    }
+    },
+    onChange(value) {
+      console.log(value);
+    },
   },
   mounted() {
     this.mapFly()
@@ -614,8 +651,11 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.first-container{
-  .introduce-part{
+.first-row{
+  text-align: center;
+}
+
+.introduce-part{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -628,15 +668,11 @@ export default {
     opacity: 0.7;
     color: #3eaf7c;
   }
-  #myChart{
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-  }
+
   //.content-part{
   //  display: flex;
   //  justify-content: center;
   //  align-items: center;
   //}
-}
+
 </style>

@@ -2,8 +2,33 @@
   <div class="first-container" :style="`min-height: ${pageMinHeight}px`">
     <a-card>
       <a-row :gutter="24" class="first-row">
-        <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px', }">
-            <h2>请选择时间查看对应的热力图</h2>
+        <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
+            <h2>请先选择事件查看对应的热力图</h2>
+        </a-col>
+        <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
+          <a-select
+              show-search
+              placeholder="Select a person"
+              option-filter-prop="children"
+              style="width: 200px"
+              :filter-option="filterOption"
+              @focus="handleFocus"
+              @blur="handleBlur"
+              @change="handleChange"
+          >
+            <a-select-option value="上海疫情">
+              上海疫情
+            </a-select-option>
+            <a-select-option value="俄乌冲突">
+              俄乌冲突
+            </a-select-option>
+            <a-select-option value="安倍晋三">
+              安倍晋三
+            </a-select-option>
+          </a-select>
+        </a-col>
+        <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
+          <h2>请再选择时间查看特定时间的热力图</h2>
         </a-col>
         <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
           <div>
@@ -59,6 +84,20 @@ export default {
   },
 
   methods: {
+    handleChange(value) {
+      console.log(`selected ${value}`);
+    },
+    handleBlur() {
+      console.log('blur');
+    },
+    handleFocus() {
+      console.log('focus');
+    },
+    filterOption(input, option) {
+      return (
+          option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      );
+    },
     disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {
@@ -124,7 +163,7 @@ export default {
 <style scoped lang="less">
 .first-container{
   .first-row{
-    left: 10%;
+    text-align: center;
     //display: flex;
     //justify-content: center;
     //text-align: center;

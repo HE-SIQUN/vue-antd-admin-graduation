@@ -217,7 +217,7 @@ const options = {
             {
               path: 'lean',
               name: '话题下微博情感倾向分析图',
-              component: () => import('@/pages/topicPic/index'),
+              component: () => import('@/pages/topicPic/topicPhenomenon'),
             },
             {
               path: 'distribute',

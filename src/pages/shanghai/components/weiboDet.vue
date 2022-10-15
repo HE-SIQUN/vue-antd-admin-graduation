@@ -105,7 +105,7 @@ export default {
             new Flow('map123', {
               map: {
                 type: 'amap',
-                style: 'dark',
+                style: 'light',
                 center: [116.3956, 39.9392],
                 pitch: 0,
                 zoom: 10,

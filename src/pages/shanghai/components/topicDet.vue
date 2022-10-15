@@ -167,51 +167,40 @@ export default {
 
         visualMap: {
 
-          show: false,
+          show: true,
 
           x: "left",
 
           y: "center",
 
           //改变地图区域颜色
-
-          splitList: [
-
-            { start: 500, end: 600 },
-
-            { start: 400, end: 500 },
-
-            { start: 300, end: 400 },
-
-            { start: 200, end: 300 },
-
-            { start: 100, end: 200 },
-
-            { start: 0, end: 100 },
-
-          ],
+          text: ['积极情绪', '消极情绪'],
+          calculable: true,
+          // splitList: [
+          //
+          //   { start: 500, end: 600 },
+          //
+          //   { start: 400, end: 500 },
+          //
+          //   { start: 300, end: 400 },
+          //
+          //   { start: 200, end: 300 },
+          //
+          //   { start: 100, end: 200 },
+          //
+          //   { start: 0, end: 100 },
+          //
+          // ],
 
           color: [
 
-            "#ffff00",
+            '#ff3c3c',
 
-            "#0e94eb",
-
-            "#70bcf0",
-
-            "#f0f26c",
-
-            "#00cd00",
-
-            "#eff26f",
+            "#8cbcd8",
 
           ],
 
         },
-
-
-
-
         //配置属性
 
         series: [
@@ -230,7 +219,7 @@ export default {
 
               normal: {
 
-                show: false, //省份名称
+                show: true  , //省份名称
 
               },
 
