@@ -2,7 +2,7 @@
   <div class="first-container" :style="`min-height: ${pageMinHeight}px`">
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
-        <a-card title="地理位置选择" bordered style="width: 250px">
+        <a-card title="请选择时间和位置" bordered style="width: 250px">
           <a-cascader
               :options="options"
               :display-render="displayRender"
@@ -12,7 +12,7 @@
               style="margin-bottom: 20px"
           />
           <a-button type="primary" v-if="button" @click="onButtonClick">
-           跳转到{{button_name}}
+           跳转到
           </a-button>
         </a-card>
       </a-col>
@@ -108,16 +108,22 @@ export default {
       table:false,
       options: [
         {
-          value: 'zhejiang',
-          label: '江苏',
+          value: '2022-07',
+          label: '2022-07',
           children: [
             {
-              value: 'hangzhou',
-              label: '上海疫情',
+              value: 'shanghai',
+              label: '江苏',
               children:[
                 {
                   value: 'hangzhou',
-                  label: '#上海疫情防控发布会#',
+                  label: '上海疫情',
+                  children:[
+                    {
+                      value: 'hangzhou',
+                      label: '#上海疫情防控发布会#',
+                    }
+                  ]
                 }
 
               ]
@@ -125,16 +131,23 @@ export default {
           ],
         },
         {
-          value: 'jiangsu',
-          label: '新疆',
+          value: '2022-08',
+          label: '2022-08',
           children: [
             {
-              value: 'hangzhou',
-              label: '俄乌冲突',
+              value: 'xinjiang',
+              label: '新疆',
               children:[
                 {
-                  value: 'nanjing',
-                  label: '#俄乌冲突对金融市场有什么影响#',
+                  value: 'hangzhou',
+                  label: '俄乌冲突',
+                  children:[
+                    {
+                      value: 'nanjing',
+                      label: '#俄乌冲突对金融市场有什么影响#',
+                    }
+
+                  ]
                 }
 
               ]
@@ -154,7 +167,7 @@ export default {
       return labels[labels.length - 1];
     },
     onButtonClick(){
-      this.$router.push('/topic/shanghai/detail')
+      this.$router.push('/incident/shanghai/detail')
     }
   },
   computed: {
@@ -169,31 +182,12 @@ export default {
   justify-content: center;
   align-items: center;
   background: @base-bg-color;
-  .-close-icon{
-    position: absolute !important;
-    right:20px;
-  }
 }
 .introduce-part{
-}
-.steps-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 16px;
-  border: 1px dashed #e9e9e9;
-  border-radius: 6px;
-  background-color: #fafafa;
-  min-height: 69px;
-  //text-align: center;
-  //padding-top: 80px;
 }
 .ant-card-bordered{
   border: 5px solid #3eaf7c;
   border-radius: 20px;
 }
 
-.steps-action {
-  margin-top: 24px;
-}
 </style>

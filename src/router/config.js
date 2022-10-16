@@ -222,7 +222,7 @@ const options = {
             {
               path: 'distribute',
               name: '话题下发博人分布图',
-              component: () => import('@/pages/location/index'),
+              component: () => import('@/pages/topicPic/topicDistribuctor/index'),
             }
           ]
         },
@@ -251,14 +251,14 @@ const options = {
           children: [
             {
               path: 'demo2',
-              name: '地理位置相关信息',
+              name: '发博人相关信息',
               component: () => import('@/pages/location/index'),
             },
-            {
-              path: 'demo3',
-              name: '时间位置相关信息',
-              component: () => import('@/pages/time/index'),
-            },
+            // {
+            //   path: 'demo3',
+            //   name: '时间位置相关信息',
+            //   component: () => import('@/pages/time/index'),
+            // },
           ]
         },
         // {

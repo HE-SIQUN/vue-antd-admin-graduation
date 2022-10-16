@@ -2,7 +2,7 @@
   <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px' }">
-        <a-card title="博文内容" :bordered="false" :style="{ marginBottom: '24px',height:'238px'}">
+        <a-card title="博文内容" :bordered="false" :style="{ marginBottom: '24px',}">
           <p>上海市疫情防控核酸筛查专班负责人夏科家表示，对于“常态化检测点不接受核酸报告超过72小时”的说法，市防控办没有出台过此类要求，我们已要求各区开展自查，如有个别采样点擅自加码，必须坚决整改。另外需要说明一下，大家出入居住的本社区，不需要提供72小时内核酸阴性证明。但是需要规范佩戴口罩，配合测温，并主动扫出入口的“场所码”，出示“随申码”绿码。</p>
         </a-card>
         <a-card title="评论展示内容" :bordered="false" >
@@ -30,16 +30,13 @@
           </div>
         </a-card>
       </a-col>
-      <a-col :sm="24" :md="24" :xl="9" :style="{ marginBottom: '24px' }">
-        <a-card title="博文评论主题类型" :bordered="false" style="height: 665px">
+      <a-col :sm="24" :md="24" :xl="18" :style="{ marginBottom: '24px' }">
+        <a-card title="博文评论情感分布" :bordered="false" >
 <!--          <p>评论类型</p>-->
-          <div id="mountNode"></div>
-        </a-card>
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="9" :style="{ marginBottom: '24px' }">
-        <a-card title="博文评论主题类型" :bordered="false" style="height: 665px">
-          <!--          <p>评论类型</p>-->
-          <div id="mountNode"></div>
+          <div id="container">
+            <div id="container1"></div>
+            <div id="container2"></div>
+          </div>
         </a-card>
       </a-col>
       <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
@@ -56,6 +53,8 @@
 import {mapState} from 'vuex'
 import { Pie } from '@antv/g2plot';
 import { Flow } from '@antv/l7plot';
+import { Column} from '@antv/g2plot';
+import { each, groupBy } from '@antv/util';
 import reqwest from 'reqwest';
 import infiniteScroll from 'vue-infinite-scroll';
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
@@ -64,14 +63,6 @@ export default {
   name: 'TopicDetail',
   data() {
     return {
-      pieData:[
-          { type: '分类一', value: 27 },
-          { type: '分类二', value: 25 },
-          { type: '分类三', value: 18 },
-          { type: '分类四', value: 15 },
-          { type: '分类五', value: 10 },
-          { type: '其他', value: 5 },
-      ],
       data: [],
       loading: false,
       busy: false,
@@ -84,19 +75,89 @@ export default {
   },
   methods:{
     mountNode(){
-      const piePlot = new Pie('mountNode', {
-        appendPadding: 10,
-        data:this.pieData,
-        angleField: 'value',
-        colorField: 'type',
-        radius: 0.8,
-        label: {
-          type: 'outer',
-          content: '{name} {percentage}',
-        },
-        interactions: [{ type: 'pie-legend-active' }, { type: 'element-active' }],
-      });
-      piePlot.render();
+      fetch('./data/pie.json  ')
+          .then((data) => data.json())
+          .then((data) => {
+            const pieData = ((originData) => {
+              const groupData = groupBy(originData, 'type');
+              const result = [];
+              each(groupData, (values, k) => {
+                result.push({ type: k, value: values.reduce((a, b) => a + b.value, 0) });
+              });
+              return result;
+            })(data);
+
+            const pie = new Pie('container1', {
+              data: pieData,
+              colorField: 'type',
+              angleField: 'value',
+              label: { type: 'inner' },
+              tooltip: false,
+              state: {
+                // 设置【active】激活状态样式 - 无描边
+                active: {
+                  style: {
+                    lineWidth: 0,
+                  },
+                },
+              },
+              interactions: [
+                {
+                  type: 'element-highlight',
+                  cfg: {
+                    showEnable: [{ trigger: 'element:mouseenter', action: 'cursor:pointer' }],
+                    end: [
+                      { trigger: 'element:mouseleave', action: 'cursor:default' },
+                      { trigger: 'element:mouseleave', action: 'element-highlight:reset' },
+                    ],
+                  },
+                },
+              ],
+            });
+
+            const column = new Column('container2', {
+              data,
+              xField: 'city',
+              yField: 'value',
+              seriesField: 'type',
+              isGroup: 'true',
+              legend: false,
+              columnStyle: {
+                radius: [4, 4, 0, 0],
+              },
+            });
+
+            pie.render();
+            column.render();
+
+            pie.on('element:mouseover', (evt) => {
+              const eventData = evt.data;
+              if (eventData?.data) {
+                const type = eventData.data.type;
+                column.setState('selected', (datum) => datum.type === type);
+                column.setState('selected', (datum) => datum.type !== type, false);
+              }
+            });
+            pie.on('element:mouseleave', () => {
+              // 取消 selected 选中状态
+              column.setState('selected', () => true, false);
+            });
+
+            pie.on('element:click', (evt) => {
+              const eventData = evt.data;
+              if (eventData?.data) {
+                const type = eventData.data.type;
+                pie.chart.changeData(pieData.filter((datum) => datum.type === type));
+                column.chart.changeData(data.filter((datum) => datum.type === type));
+              }
+            });
+            // 双击，还原数据
+            pie.on('element:dblclick', () => {
+              pie.chart.changeData(pieData);
+              column.chart.changeData(data);
+            });
+          });
+
     },
     forwardMap(){
       fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
@@ -214,12 +275,20 @@ export default {
   border-radius: 4px;
   overflow: auto;
   padding: 8px 24px;
-  height: 300px;
+  min-height: 300px;
 }
 .demo-loading-container {
   position: absolute;
   bottom: 40px;
   width: 100%;
   text-align: center;
+}
+#container {
+  display: flex;
+  flex-direction: column !important;
+  padding: 8px;
+}
+#container1,#container2 {
+  flex: 1;
 }
 </style>

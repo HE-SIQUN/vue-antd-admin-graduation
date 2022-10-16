@@ -20,15 +20,15 @@
         </a-col>
 <!--        右边-->
         <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
-          <a-card title="话题关键词词云" :bordered="false" :style="{height:'500px'}">
+          <a-card title="事件词云" :bordered="false" :style="{height:'500px'}">
             <div id="chart-cloud"></div>
           </a-card>
         </a-col>
       </a-row>
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <a-card title="事件热度趋势" :bordered="false">
-          <div id="line-container"></div>
+        <a-card title="事件热度趋势" :bordered="false" >
+          <div id="line-container"  style="min-height: 550px"></div>
         </a-card>
       </a-col>
       <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
@@ -61,7 +61,7 @@ for (let i = 0; i < 23; i++) {
   })
 }
 import {mapState} from 'vuex'
-import { Line ,WordCloud} from '@antv/g2plot';
+import { Area ,WordCloud} from '@antv/g2plot';
 import { Heatmap } from '@antv/l7plot';
 export default {
   name: 'TopicDetail',
@@ -91,25 +91,21 @@ export default {
   },
   methods:{
     test(){
-      fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
+      fetch('./data/test.json')
           .then((res) => res.json())
           .then((data) => {
-            const line = new Line('line-container', {
+            const area = new Area('line-container', {
               data,
-              padding: 'auto',
-              xField: 'Date',
-              yField: 'scales',
-              xAxis: {
-                tickCount: 5,
-              },
+              xField: 'date',
+              yField: 'value',
+              seriesField: 'country',
               slider: {
                 start: 0.1,
-                end: 0.5,
+                end: 0.9,
               },
             });
-
-            line.render();
-          })
+            area.render();
+          });
     },
     cloud(){
       fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json')

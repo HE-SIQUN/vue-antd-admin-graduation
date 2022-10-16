@@ -13,7 +13,7 @@
         <a-col :sm="24" :md="24" :xl="12">
           <a-cascader
               :options="options"
-              :default-value="['上海疫情', '#上海疫情发布会#']"
+              :default-value="['上海疫情']"
               @change="onChange"
           />
         </a-col>
@@ -30,7 +30,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import {Line} from "@antv/g2plot";
+import {Area} from "@antv/g2plot";
 export default {
   name: 'Demo',
   data() {
@@ -40,22 +40,10 @@ export default {
         {
           value: '上海疫情',
           label: '上海疫情',
-          children: [
-            {
-              value: '#上海疫情发布会#',
-              label: '#上海疫情发布会#',
-            },
-          ],
         },
         {
           value: '俄乌冲突',
           label: '俄乌冲突',
-          children: [
-            {
-              value: '#俄乌冲突已进行到第三天#',
-              label: '#俄乌冲突已进行到第三天#',
-            },
-          ],
         },
       ],
     }
@@ -66,27 +54,25 @@ export default {
 
   methods: {
     Line(){
-      fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
+      fetch('./data/test.json')
           .then((res) => res.json())
           .then((data) => {
-            const line = new Line('line-container', {
+            const area = new Area('line-container', {
               data,
-              padding: 'auto',
-              xField: 'Date',
-              yField: 'scales',
-              xAxis: {
-                tickCount: 5,
-              },
+              xField: 'date',
+              yField: 'value',
+              seriesField: 'country',
               slider: {
                 start: 0.1,
-                end: 0.5,
+                end: 0.9,
               },
             });
-
-            line.render();
-          })
+            area.render();
+          });
     },
     onChange(value) {
+      this.title=value.toString()
+
       console.log(value);
     }
   },
