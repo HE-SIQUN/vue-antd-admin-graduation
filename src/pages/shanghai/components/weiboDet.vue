@@ -42,6 +42,11 @@
       <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px' }">
         <a-card title="微博博文一级转发地图示意图" :bordered="false">
 <!--          <p>转发地图展示区域</p>-->
+          <template v-slot:extra>
+            <a-button type="primary" @click="onButtonClick" >
+              查看具体
+            </a-button>
+          </template>
           <div id="map123" style="min-height: 500px; justify-content: center;position: relative"></div>
         </a-card>
       </a-col>
@@ -255,6 +260,9 @@ export default {
         this.data = data.concat(res.results);
         this.loading = false;
       });
+    },
+    onButtonClick(){
+      this.$router.push('/context/repostImage')
     }
   },
   computed: {

@@ -30,12 +30,22 @@
     <a-col :sm="24" :md="24" :xl="14" :style="{ marginBottom: '24px' }">
       <a-card title="话题下发博人地理信息地图展示" :bordered="false" :style="{ marginBottom: '24px' }">
 <!--        <p>地图实例</p>-->
+        <template v-slot:extra>
+          <a-button type="primary" @click="onButtonClick" >
+            查看具体
+          </a-button>
+        </template>
         <div id="map-container" style="min-height: 500px; justify-content: center;position: relative">
         </div>
       </a-card>
       <a-card title="话题内微博情感分析" :bordered="false">
 <!--        <p>底部微博情感分析地图展示区域</p>-->
-        <div id="myChartChina" :style="{ width: '10%', height: '10%' }"></div>
+        <template v-slot:extra>
+          <a-button type="primary" @click="onButtonClick2" >
+            查看具体
+          </a-button>
+        </template>
+        <div ref="myChartChina" :style="{ width: '10%', height: '10%' }"></div>
       </a-card>
     </a-col>
     </a-row>
@@ -123,7 +133,7 @@ export default {
     },
     drawLine() {
 
-      const myChartContainer = document.getElementById("myChartChina"); //绑定div容器
+      const myChartContainer = this.$refs.myChartChina; //绑定div容器
 
       const resizeMyChartContainer = function () {
 
@@ -321,6 +331,12 @@ export default {
 
       };
 
+    },
+    onButtonClick(){
+      this.$router.push('/topicI/distribute')
+    },
+    onButtonClick2(){
+      this.$router.push('/topicI/lean')
     }
 
   },

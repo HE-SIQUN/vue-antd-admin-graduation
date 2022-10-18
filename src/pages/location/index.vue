@@ -29,13 +29,6 @@
         {{ tag.toUpperCase() }}
       </a-tag>
     </span>
-          <span slot="action" slot-scope="text, record">
-      <a>Invite 一 {{ record.name }}</a>
-      <a-divider type="vertical" />
-      <a>Delete</a>
-      <a-divider type="vertical" />
-      <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
-    </span>
         </a-table>
       </a-col>
 
@@ -57,7 +50,7 @@ const columns = [
     key: 'age',
   },
   {
-    title: 'Address',
+    title: 'IP地址',
     dataIndex: 'address',
     key: 'address',
   },
@@ -66,35 +59,30 @@ const columns = [
     key: 'tags',
     dataIndex: 'tags',
     scopedSlots: { customRender: 'tags' },
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
+  }
 ];
 
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    name: '新华网',
+    age: null,
+    address: '北京',
+    tags: ['蓝V用户', 'developer'],
   },
   {
     key: '2',
-    name: 'Jim Green',
+    name: '马云',
     age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    address: '上海',
+    tags: ['橙V用户'],
   },
   {
     key: '3',
-    name: 'Joe Black',
+    name: '川建国',
     age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    address: '上海',
+    tags: ['普通用户'],
   },
 ];
 import {mapState} from 'vuex'

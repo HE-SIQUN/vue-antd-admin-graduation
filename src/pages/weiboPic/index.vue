@@ -20,7 +20,7 @@
       </a-row>
       <a-row  type="flex" justify="center">
         <a-col :span="16">
-          <div id="myChart" :style="{ width: '1000px', height: '1000px'}"></div>
+          <div ref="myChartChina"></div>
         </a-col>
       </a-row>
     </a-card>
@@ -216,18 +216,19 @@ export default {
     }
   },
   methods:{
-    mapFly(){
-      const myChartcontainer = document.getElementById("myChart")
+    mapChina(){
+      const myChartContainer = this.$refs.myChartChina; //绑定div容器
+
       const resizeMyChartContainer = function () {
 
-        myChartcontainer.style.width = 88+ "%";
+        myChartContainer.style.width = 100+ "%";
 
-        myChartcontainer.style.height = window.innerHeight * 0.7 + "px";
+        myChartContainer.style.height = window.innerHeight * 0.5 + "px";
 
       };
 
       resizeMyChartContainer();
-      var myChart = this.$echarts.init(myChartcontainer)
+      var myChart = this.$echarts.init(myChartContainer)
       const year = ["一级转发点", "二级转发点", "三级转发点"];
       const mapData = [
         [],
@@ -455,7 +456,7 @@ export default {
                   id: 'statistic',
                   text: year[n] ,
                   left: '75%',
-                  top: '8%',
+                  top: '5%',
                   textStyle: {
                     color: '#fff',
                     fontSize: 25
@@ -635,15 +636,21 @@ export default {
           ]
         })
       }
-      console.log(optionXyMap01)
       myChart.setOption(optionXyMap01);
+      window.onresize = function () {
+
+        resizeMyChartContainer();
+
+        myChart.resize();
+
+      };
     },
     onChange(value) {
       console.log(value);
     },
   },
   mounted() {
-    this.mapFly()
+    this.mapChina()
   },
   computed: {
     ...mapState('setting', ['pageMinHeight']),

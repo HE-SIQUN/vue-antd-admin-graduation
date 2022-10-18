@@ -8,13 +8,14 @@
         <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px', }">
           <a-select
               show-search
-              placeholder="Select a person"
+              placeholder="请选择事件"
               option-filter-prop="children"
               style="width: 200px"
               :filter-option="filterOption"
               @focus="handleFocus"
               @blur="handleBlur"
               @change="handleChange"
+              defaultValue="上海疫情"
           >
             <a-select-option value="上海疫情">
               上海疫情

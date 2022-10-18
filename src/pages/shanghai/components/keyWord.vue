@@ -9,7 +9,7 @@
                   <span>{{item.content}}</span>
                 </router-link>
                 <div class="progress-style">
-                  <a-progress :percent="50" size="small" status="active" />
+                  <a-progress  :percent="item.percent" size="small" status="active" v-slot:format="percent">{{percent*66500}}</a-progress>
                 </div>
               </div>
             <!--分页区域-->
@@ -32,7 +32,13 @@
         </a-card>
       </a-col>
       <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
-        <a-card title="事件分布热度" :bordered="false">
+        <a-card title="事件分布热度" :bordered="false" >
+          <template v-slot:extra>
+            <a-button type="primary" @click="onButtonClick" >
+              查看具体
+            </a-button>
+          </template>
+
           <div id="space-container" style="min-height: 550px">
           </div>
         </a-card>
@@ -70,16 +76,16 @@ export default {
       listData,
       current: 2,
       listDataForm:[
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
-        {content:"#上海疫情正处于快速上升阶段#"},
-        {content:"#上海六院疫情#"},
-        {content:"#上海疫情求助#"},
-        {content:"#专家称上海这次疫情规模比武汉大#"},
-        {content:"#上海交大疫情#"},
-        {content:"#上海对因疫情致基本生活困难群众加强救助#"},
-        {content:"#上海疫情防控工作发布会#"},
-        {content:"#上海处于把疫情围住捞干阶段#"},
-        {content:"#上海此次ktv疫情在沪密接2.3万人#"},
+        {content:"#上海市新冠肺炎疫情防控新闻发布会#",percent:100},
+        {content:"#上海疫情正处于快速上升阶段#",percent:95},
+        {content:"#上海六院疫情#",percent:80},
+        {content:"#上海疫情求助#",percent:75},
+        {content:"#专家称上海这次疫情规模比武汉大#",percent:74},
+        {content:"#上海交大疫情#",percent:72},
+        {content:"#上海对因疫情致基本生活困难群众加强救助#",percent:68},
+        {content:"#上海疫情防控工作发布会#",percent: 65},
+        {content:"#上海处于把疫情围住捞干阶段#",percent: 63},
+        {content:"#上海此次ktv疫情在沪密接2.3万人#",percent: 50},
         {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
         {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
         {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
@@ -160,6 +166,9 @@ export default {
               },
             });
           });
+    },
+    onButtonClick(){
+      this.$router.push('/keyword/hotIPage')
     }
   },
   computed: {

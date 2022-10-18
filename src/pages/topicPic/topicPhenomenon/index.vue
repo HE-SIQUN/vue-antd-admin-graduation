@@ -39,7 +39,7 @@
       </a-row>
       <a-row :gutter="24" >
         <a-col :sm="24" :md="24" :xl="24" :style="{ marginBottom: '24px', }">
-          <div id="myChartChina" :style="{ width: '10%', height: '10%' }"></div>
+          <div ref="myChartChina" :style="{ width: '10%', height: '10%' }"></div>
         </a-col>
       </a-row>
     </a-card>
@@ -115,15 +115,15 @@ export default {
     handleEndOpenChange(open) {
       this.endOpen = open;
     },
-    PhenomenonMap() {
+    PhenomenonTotalMap() {
 
-      const myChartContainer = document.getElementById("myChartChina"); //绑定div容器
+      const myChartContainer = this.$refs.myChartChina; //绑定div容器
 
       const resizeMyChartContainer = function () {
 
         myChartContainer.style.width = 100+ "%";
 
-        myChartContainer.style.height = window.innerHeight * 0.6+ "px";
+        myChartContainer.style.height = window.innerHeight * 0.5 + "px";
 
       };
 
@@ -281,6 +281,7 @@ export default {
 
 
       myChartChina.setOption(optionMap);
+      console.log('zhongguo')
 
       window.onresize = function () {
 
@@ -296,7 +297,7 @@ export default {
     ...mapState('setting', ['pageMinHeight']),
   },
   mounted() {
-    this.PhenomenonMap()
+    this.PhenomenonTotalMap()
   }
 }
 </script>
