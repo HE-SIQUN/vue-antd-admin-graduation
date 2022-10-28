@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       listData,
-      current: 2,
+      current: 1,
       listDataForm:[
         {content:"#上海市新冠肺炎疫情防控新闻发布会#",percent:100},
         {content:"#上海疫情正处于快速上升阶段#",percent:95},
@@ -86,11 +86,11 @@ export default {
         {content:"#上海疫情防控工作发布会#",percent: 65},
         {content:"#上海处于把疫情围住捞干阶段#",percent: 63},
         {content:"#上海此次ktv疫情在沪密接2.3万人#",percent: 50},
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
-        {content:"#上海市新冠肺炎疫情防控新闻发布会#"},
+        {content:"#上海闵行3名干部因疫情防控不力被处理#",percent: 47},
+        {content:"#上海通报兰溪路148号疫情相关情况#",percent: 45},
+        {content:"#上海瑞金医院医生取消休假迎战疫情#",percent: 42},
+        {content:"#上海个人隐瞒疫情将列入征信黑名单#",percent: 40},
+        {content:"#梁万年解读上海疫情防控难点#",percent: 35},
   ],
       pageSize:0
     }
@@ -114,7 +114,7 @@ export default {
           });
     },
     cloud(){
-      fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json')
+      fetch('./data/cloud.json')
           .then((res) => res.json())
           .then((data) => {
             const wordCloud = new WordCloud('chart-cloud', {

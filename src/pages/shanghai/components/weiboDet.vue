@@ -2,10 +2,10 @@
   <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px' }">
-        <a-card title="博文内容" :bordered="false" :style="{ marginBottom: '24px',}">
+        <a-card title="博文内容" :bordered="false" :style="{ marginBottom: '24px',height:'300px'}">
           <p>上海市疫情防控核酸筛查专班负责人夏科家表示，对于“常态化检测点不接受核酸报告超过72小时”的说法，市防控办没有出台过此类要求，我们已要求各区开展自查，如有个别采样点擅自加码，必须坚决整改。另外需要说明一下，大家出入居住的本社区，不需要提供72小时内核酸阴性证明。但是需要规范佩戴口罩，配合测温，并主动扫出入口的“场所码”，出示“随申码”绿码。</p>
         </a-card>
-        <a-card title="评论展示内容" :bordered="false" >
+        <a-card title="评论展示内容" :bordered="false" :style="{ marginBottom: '24px',height:'595px'}">
           <div
               v-infinite-scroll="handleInfiniteOnLoad"
               class="demo-infinite-container"
@@ -18,7 +18,7 @@
                   <a slot="title" :href="item.href">{{ item.name.last }}</a>
                   <a-avatar
                       slot="avatar"
-                      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                      src="https://tvax2.sinaimg.cn/crop.0.0.1080.1080.180/006Hbch4ly8h633iv9z4zj30u00u0q8f.jpg?KID=imgbed,tva&Expires=1666979206&ssig=8y1dE5RnSH "
                   />
                 </a-list-item-meta>
                 <div>Content</div>

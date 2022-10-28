@@ -3,7 +3,7 @@
     <a-row :gutter="24" >
     <a-col :sm="24" :md="24" :xl="10" :style="{ marginBottom: '24px' }">
       <a-card title="话题下微博详情列表" :bordered="false">
-                    <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
+                    <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="dataA">
         <!--              <div slot="footer"><b>ant design vue</b> footer part</div>-->
                       <a-list-item slot="renderItem" key="item.title" slot-scope="item">
                         <template v-for="{ type, text } in actions" slot="actions">
@@ -12,12 +12,14 @@
                           {{ text }}
                         </span>
                         </template>
-                        <img
+                        <img v-if="item.image!=''"
                             slot="extra"
                             width="172"
+                            height="150"
                             alt="logo"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                            :src="item.image"
                         />
+<!--                        <img  v-else src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="">-->
 <!--                        <a-list-item-meta :description="item.description">-->
 <!--                          <a slot="title" :href="item.href">{{ item.title }}</a>-->
 <!--                          <a-avatar slot="avatar" :src="item.avatar" />-->
@@ -53,6 +55,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 const listData = []
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -73,11 +77,12 @@ export default {
   data() {
     return {
       listData,
+      dataA:[],
       pagination: {
         onChange: page => {
           console.log(page)
         },
-        pageSize: 5
+        pageSize: 4
       },
       actions: [
         { type: 'star-o', text: '156' },
@@ -337,6 +342,12 @@ export default {
     },
     onButtonClick2(){
       this.$router.push('/topicI/lean')
+    },
+    async getInitial(){
+      const data=await axios.get('./data/huati.json')
+      console.log(data)
+      console.log(data.data)
+      this.dataA=data.data
     }
 
   },
@@ -347,6 +358,9 @@ export default {
     this.mapCreate()
     this.drawLine()
     // this.graphCreate()
+  },
+  created() {
+    this.getInitial()
   }
 }
 </script>
