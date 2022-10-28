@@ -1,6 +1,6 @@
 <template>
   <div>
-      <a-row :gutter="24" >
+      <a-row :gutter="24">
         <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px'}">
           <a-card title="事假中话题博文热度列表" :bordered="false" :style="{height:'500px'}">
 <!--            v-for="(item,index) in listDataForm" :key="index"-->

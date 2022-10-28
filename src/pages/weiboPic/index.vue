@@ -19,7 +19,22 @@
         </a-col>
       </a-row>
       <a-row  type="flex" justify="center">
-        <a-col :span="16">
+
+        <a-col :span="3">
+          <div class="button-control">
+            <a-button icon="search" style="margin-bottom: 24px">
+              转发路径一
+            </a-button>
+            <a-button icon="search" style="margin-bottom: 24px">
+              转发路径二
+            </a-button>
+            <a-button icon="search" style="margin-bottom: 24px">
+              转发路径三
+            </a-button>
+          </div>
+
+        </a-col>
+        <a-col :span="15">
           <div ref="myChartChina"></div>
         </a-col>
       </a-row>
@@ -660,6 +675,9 @@ export default {
 <style scoped lang="less">
 .first-row{
   text-align: center;
+}
+.button-control{
+  margin-right:24px;
 }
 
 .introduce-part{

@@ -254,6 +254,11 @@ const options = {
               name: '发博人相关信息',
               component: () => import('@/pages/location/index'),
             },
+            {
+              path:'zhaokai',
+              name:'赵开好帅',
+              component: () => import('@/pages/demo/zhaokai')
+            }
             // {
             //   path: 'demo3',
             //   name: '时间位置相关信息',
