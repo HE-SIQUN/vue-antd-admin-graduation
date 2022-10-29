@@ -31,11 +31,14 @@
 <script>
 import {mapState} from 'vuex'
 import {Area} from "@antv/g2plot";
+import axios from "axios";
 export default {
   name: 'Demo',
   data() {
     return {
       title:'上海疫情',
+      chart:null,
+      data:{},
       options: [
         {
           value: '上海疫情',
@@ -49,16 +52,23 @@ export default {
     }
   },
   watch: {
-
+    data(){
+      this.$nextTick(()=>{
+        this.changeCharts()
+      })
+    }
   },
 
   methods: {
+    changeCharts(){
+      this.chart.changeData(this.data)
+    },
     Line(){
       fetch('./data/test.json')
           .then((res) => res.json())
           .then((data) => {
-            const area = new Area('line-container', {
-              data,
+            this.chart = new Area('line-container', {
+              data:data,
               xField: 'date',
               yField: 'value',
               seriesField: 'country',
@@ -67,13 +77,20 @@ export default {
                 end: 0.9,
               },
             });
-            area.render();
+            this.chart.render();
           });
     },
-    onChange(value) {
+    async onChange(value) {
       this.title=value.toString()
+      if(this.title==="上海疫情"){
+        const {data}=await axios.get('./data/test.json')
+        this.data=data
+      }else{
+        const {data}=await axios.get('./data/line.json')
+        this.data=data
+      }
 
-      console.log(value);
+
     }
   },
   computed: {

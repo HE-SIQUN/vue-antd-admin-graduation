@@ -37,7 +37,7 @@
                 v-model="startValue"
                 :disabled-date="disabledStartDate"
                 show-time
-                format="YYYY-MM-DD HH:mm:ss"
+                format="YYYY-MM-DD"
                 placeholder="Start"
                 @openChange="handleStartOpenChange"
             />
@@ -45,10 +45,11 @@
                 v-model="endValue"
                 :disabled-date="disabledEndDate"
                 show-time
-                format="YYYY-MM-DD HH:mm:ss"
+                format="YYYY-MM-DD"
                 placeholder="End"
                 :open="endOpen"
                 @openChange="handleEndOpenChange"
+                @ok="timeChangeFn"
             />
           </div>
         </a-col>
@@ -66,13 +67,16 @@
 <script>
 import {mapState} from 'vuex'
 import {Heatmap} from "@antv/l7plot";
+import moment from "moment";
+import axios from "axios";
 export default {
   name: 'Demo',
   data() {
     return {
-      startValue: null,
-      endValue: null,
+      startValue: "2022-03-01",
+      endValue: "2022-03-31",
       endOpen: false,
+      data:{}
     }
   },
   watch: {
@@ -99,19 +103,11 @@ export default {
           option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
       );
     },
-    disabledStartDate(startValue) {
-      const endValue = this.endValue;
-      if (!startValue || !endValue) {
-        return false;
-      }
-      return startValue.valueOf() > endValue.valueOf();
+    disabledStartDate(current) {
+      return (current && current > moment().endOf("day")) || (current && current > moment(this.endValue).endOf("day")||(current && current < moment(this.startValue).startOf("day")))
     },
-    disabledEndDate(endValue) {
-      const startValue = this.startValue;
-      if (!endValue || !startValue) {
-        return false;
-      }
-      return startValue.valueOf() >= endValue.valueOf();
+    disabledEndDate(current) {
+      return (current && current > moment().endOf("day")) || (current && current < moment(this.startValue).startOf("day")||(current && current > moment(this.endValue).endOf("day")))
     },
     handleStartOpenChange(open) {
       if (!open) {
@@ -121,10 +117,19 @@ export default {
     handleEndOpenChange(open) {
       this.endOpen = open;
     },
+    //选择时间
+    async timeChangeFn(){
+      const {data}=await axios.get('./data/phnomenon.json')
+      console.log(data)
+      console.log(this.data)
+      this.data=data
+      console.log(this.data)
+    },
     spaceMapTotal(){
       fetch('https://gw.alipayobjects.com/os/antfincdn/OOSGL1vhp3/20200726024229.json')
           .then((response) => response.json())
           .then((data) => {
+            this.data=data
             new Heatmap('space-container-total', {
               map: {
                 type: 'amap',
@@ -134,7 +139,7 @@ export default {
                 pitch: 0,
               },
               source: {
-                data: data,
+                data: this.data,
                 parser: {
                   type: 'geojson',
                 },
@@ -157,6 +162,9 @@ export default {
   },
   mounted() {
     this.spaceMapTotal()
+  },
+  beforeDestroy() {
+    this.data={}
   }
 }
 </script>
