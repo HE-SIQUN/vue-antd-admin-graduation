@@ -27,15 +27,86 @@ const options = {
       redirect: '/login',
       children: [
         {
-          path: 'demo',
-          name: '首页介绍',
+          path: 'index',
+          name: '首页',
+          component: PageView,
           meta: {
             icon: 'file-ppt',
-            page:{
-              closable: false
-            }
+            // page:{
+            //   closable: false,
+            //   title: '微博热点相关事件',
+            //   breadcrumb: ['首页','微博热点事件'],
+            // }
           },
-          component: () => import('@/pages/demo/Demo')
+          children: [
+            {
+              path: '/index',
+              name: '首页1',
+              component: () => import('@/pages/demo'),
+              meta: {
+                invisible: true,
+                closable:false
+              },
+              children:[
+                {
+                  path: '/index',
+                  name: '微博事件介绍',
+                  component: () => import('@/pages/demo/Demo'),
+                  meta: {
+                    invisible: true,
+                    page: {
+                      title: '微博相关热点事件',
+                      breadcrumb: ['首页', '微博相关热点事件'],
+                    }
+                  }
+                },
+                {
+                  path: 'shanghai',
+                  name: '上海疫情',
+                  component: () => import('@/pages/shanghai/components/keyWord'),
+                  meta: {
+                    invisible: true,
+                    page: {
+                      title: '“上海疫情”关键词详情',
+                      breadcrumb: ['首页', '话题关键词', '上海疫情'],
+                      closable: true
+                    }
+                  }
+                },
+                {
+                  path:'detail',
+                  name:'话题详情',
+                  component: () => import('@/pages/shanghai/components/topicDet'),
+                  meta: {
+                    invisible: true,
+                  },
+                },
+                {
+                  path:'weiboPage',
+                  name:'微博详情',
+                  component: () => import('@/pages/shanghai/components/weiboDet'),
+                  meta: {
+                    invisible: true,
+                  },
+                }
+              ]
+            },
+          ]
+          // children: [
+          //   {
+          //     path: 'demo',
+          //     name: '事件总览',
+          //     component: () => import('@/pages/demo/Demo'),
+          //     meta: {
+          //       invisible: false,
+          //       page: {
+          //         title: '“上海疫情”关键词详情',
+          //         breadcrumb: ['首页', '话题关键词', '上海疫情'],
+          //         closable: true
+          //       }
+          //     }
+          //   }
+          // ],
         },
 
         //  远期规划是做成动态路由

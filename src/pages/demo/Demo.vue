@@ -1,99 +1,137 @@
 <template>
   <div class="first-container" :style="`min-height: ${pageMinHeight}px`">
-    <a-row :gutter="24" >
-      <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <a-card class="introduce-part" :loading="loading" title="这是个什么系统?">
-          <a-list :grid="{ gutter: 24, xs: 1, sm: 1, md: 1, lg: 1, xl: 1, xxl: 1}" :data-source="dataArray">
-            <a-list-item slot="renderItem" slot-scope="item">
-              <a-card :title="item.title" :body-style="bodyStyle">
-                {{item.content}}
+    <div style="background-color: #e1f0e7">
+      <div style="padding-top: 24px;padding-left: 24px;padding-right: 24px" v-for="(item,index) in 3" :key="index">
+        <a-row :gutter="24" >
+          <a-col :span="8">
+            <router-link to="/index/shanghai">
+              <a-card hoverable>
+                <img
+                    slot="cover"
+                    alt="example"
+                    src="./../../assets/show/shanghai.jpeg"
+                />
+                <a-card-meta title="上海疫情">
+                  <template slot="description">
+                    自3/19起至5/31的74天内，
+                    上海全市共计阳性感染者647374人
+                    平均每天感染8748人
+                    最高峰单日全市新增27719人（4/13）
+                    浦东新区4/13单日新增15027人，为全市之最
+                    按感染人数计算，最严重的是浦东新区，共计阳性227104人
+                    按人口比例计算，最严重的是黄浦区，感染率为9.26%
+                    全市平均感染率为2.60%，即每约40人之中即有1人感染。
+                  </template>
+                </a-card-meta>
               </a-card>
-            </a-list-item>
-          </a-list>
-        </a-card>
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-          <a-card class="introduce-part" :loading="loading" title="他应该怎么用？">
-          <a-steps :current="current">
-            <a-step v-for="item in steps" :key="item.title" :title="item.title" />
-          </a-steps>
-          <div class="steps-content">
-            <p>
-              {{ steps[current].content }}
-            </p>
-<!--            <p>sad</p>-->
+            </router-link>
+          </a-col>
+          <a-col :span="8">
+            <a-card hoverable>
+              <img
+                  slot="cover"
+                  alt="example"
+                  src="./../../assets/show/shanghai.jpeg"
+              />
+              <a-card-meta title="上海疫情">
+                <template slot="description">
+                  自3/19起至5/31的74天内，
+                  上海全市共计阳性感染者647374人
+                  平均每天感染8748人
+                  最高峰单日全市新增27719人（4/13）
+                  浦东新区4/13单日新增15027人，为全市之最
+                  按感染人数计算，最严重的是浦东新区，共计阳性227104人
+                  按人口比例计算，最严重的是黄浦区，感染率为9.26%
+                  全市平均感染率为2.60%，即每约40人之中即有1人感染。
+                </template>
+              </a-card-meta>
+            </a-card>
+          </a-col>
+          <a-col :span="8">
+            <a-card hoverable>
+              <img
+                  slot="cover"
+                  alt="example"
+                  src="./../../assets/show/shanghai.jpeg"
+              />
+              <a-card-meta title="上海疫情">
+                <template slot="description">
+                  自3/19起至5/31的74天内，
+                  上海全市共计阳性感染者647374人
+                  平均每天感染8748人
+                  最高峰单日全市新增27719人（4/13）
+                  浦东新区4/13单日新增15027人，为全市之最
+                  按感染人数计算，最严重的是浦东新区，共计阳性227104人
+                  按人口比例计算，最严重的是黄浦区，感染率为9.26%
+                  全市平均感染率为2.60%，即每约40人之中即有1人感染。
+                </template>
+              </a-card-meta>
+            </a-card>
+          </a-col>
+        </a-row>
+      </div>
+      <a-pagination
+          v-model="current"
+          :page-size-options="pageSizeOptions"
+          :total="total"
+          show-size-changer
+          :page-size="pageSize"
+          @showSizeChange="onShowSizeChange"
+          class="pagination-use"
+      >
+        <template slot="buildOptionText" slot-scope="props">
+          <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
+          <span v-if="props.value === '50'">全部</span>
+        </template>
+      </a-pagination>
+    </div>
 
-            <img class="img-design" :src="steps[current].imgUrl" alt="" style="">
-          </div>
-          <div class="steps-action">
-            <a-button v-if="current < steps.length - 1" type="primary" @click="next">
-              下一步
-            </a-button>
-            <a-button
-                v-if="current == steps.length - 1"
-                type="primary"
-                @click="$message.success('就这三步，您应该学会了！！')"
-            >
-              完成
-            </a-button>
-            <a-button v-if="current > 0" style="margin-left: 8px" @click="prev">
-              上一步
-            </a-button>
-            <a-button v-if="current == steps.length - 1" style="margin-left: 8px" @click="showDrawer">
-              还不是很清楚？查看详情
-            </a-button>
-
-<!--            接下来是抽屉的部分-->
-            <a-drawer width="640" placement="right" :closable="false" :visible="visible" @close="onClose">
-              <a-icon type="close" @click="onClose" :style="closeStyle"/>
-              <p :style="[pStyle, pStyle2]">
-                这里是详细介绍~
-              </p>
-              <p :style="pStyle">
-                查看具体事件对应话题、微博内容的图文操作流程：
-              </p>
-              <a-row :gutter="24">
-                <a-col v-for="(item,index) in imgIntroduceUrl" :key="index" :span="8">
-                  <img :src="item.url" alt="" style="height: 150px;width: 250px">
-                </a-col>
-              </a-row>
-              <a-divider />
-              <p :style="[pStyle, pStyle2]">
-                事件关键词地理信息模块
-              </p>
-              <p :style="[pStyle]">
-                操作示意：
-              </p>
-              <a-row :gutter="48">
-                <a-col :span="10" :offset="2" >
-                  <img src="@/assets/show/5.jpg" alt="" style="height: 150px;width: 250px">
-                </a-col>
-                <a-col :span="10">
-                  <img src="@/assets/show/6.jpg" alt="" style="height: 150px;width: 250px">
-                </a-col>
-              </a-row>
-              <a-divider />
-              <p :style="[pStyle, pStyle2]">
-                话题地理信息模块
-              </p>
-              <p :style="[pStyle]">
-                操作示意：
-              </p>
-              <a-row :gutter="48">
-                <a-col :span="10" :offset="2" >
-                  <img src="@/assets/show/7.jpg" alt="" style="height: 150px;width: 250px">
-                </a-col>
-                <a-col :span="10">
-                  <img src="@/assets/show/8.jpg" alt="" style="height: 150px;width: 250px">
-                </a-col>
-              </a-row>
-              <a-divider />
-            </a-drawer>
-          </div>
-        </a-card>
-      </a-col>
-    </a-row>
-
+    <!--            接下来是抽屉的部分-->
+    <a-drawer width="640" placement="right" :closable="false" :visible="visible" @close="onClose">
+      <a-icon type="close" @click="onClose" :style="closeStyle"/>
+      <p :style="[pStyle, pStyle2]">
+        这里是详细介绍~
+      </p>
+      <p :style="pStyle">
+        查看具体事件对应话题、微博内容的图文操作流程：
+      </p>
+      <a-row :gutter="24">
+        <a-col v-for="(item,index) in imgIntroduceUrl" :key="index" :span="8">
+          <img :src="item.url" alt="" style="height: 150px;width: 250px">
+        </a-col>
+      </a-row>
+      <a-divider />
+      <p :style="[pStyle, pStyle2]">
+        事件关键词地理信息模块
+      </p>
+      <p :style="[pStyle]">
+        操作示意：
+      </p>
+      <a-row :gutter="48">
+        <a-col :span="10" :offset="2" >
+          <img src="@/assets/show/5.jpg" alt="" style="height: 150px;width: 250px">
+        </a-col>
+        <a-col :span="10">
+          <img src="@/assets/show/6.jpg" alt="" style="height: 150px;width: 250px">
+        </a-col>
+      </a-row>
+      <a-divider />
+      <p :style="[pStyle, pStyle2]">
+        话题地理信息模块
+      </p>
+      <p :style="[pStyle]">
+        操作示意：
+      </p>
+      <a-row :gutter="48">
+        <a-col :span="10" :offset="2" >
+          <img src="@/assets/show/7.jpg" alt="" style="height: 150px;width: 250px">
+        </a-col>
+        <a-col :span="10">
+          <img src="@/assets/show/8.jpg" alt="" style="height: 150px;width: 250px">
+        </a-col>
+      </a-row>
+      <a-divider />
+    </a-drawer>
   </div>
 </template>
 
@@ -112,8 +150,13 @@ const dataArray = [
   import {mapState} from 'vuex'
   export default {
     name: 'Demo',
+
     data() {
       return {
+        pageSizeOptions: ['10', '20', '30', '40', '50'],
+        current: 1,
+        pageSize: 10,
+        total: 50,
         dataArray,
         visible: false,
         closeStyle:{
@@ -146,24 +189,6 @@ const dataArray = [
           fontSize: '24px',
         },
         // loading: true, 有了数据以后再说
-        current: 0,
-        steps: [
-          {
-            title: '第一步',
-            content: '首先找到左侧对应的关键词，点击进入',
-            imgUrl: require('../../assets/show/2.jpg')
-          },
-          {
-            title: '第二步',
-            content: '如果想查看关键词下话题详情，可以点击话题链接',
-            imgUrl: require('../../assets/show/3.jpg')
-          },
-          {
-            title: '第三步',
-            content: '如果想查看关键词下话题详情，可以点击微博链接',
-            imgUrl: require('../../assets/show/4.jpg')
-          },
-        ],
       }
     },
     methods: {
@@ -179,6 +204,10 @@ const dataArray = [
       onClose() {
         this.visible = false;
       },
+      onShowSizeChange(current, pageSize) {
+          this.pageSize = pageSize;
+        },
+
     },
     computed: {
       ...mapState('setting', ['pageMinHeight']),
@@ -189,12 +218,14 @@ const dataArray = [
 <style scoped lang="less">
 @import "index";
 .first-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   .-close-icon{
     position: absolute !important;
     right:20px;
+  }
+  .pagination-use{
+    display: flex;
+    justify-content: center;
+    padding:24px 0;
   }
 }
 .introduce-part{
