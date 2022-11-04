@@ -5,7 +5,7 @@
           <a-card title="事假中话题博文热度列表" :bordered="false" :style="{height:'500px'}">
 <!--            v-for="(item,index) in listDataForm" :key="index"-->
               <div class="list-item-keyword" v-for="(item,index) in listDataForm" :key="index">
-                <router-link to="/incident/shanghai/detail" :style="{fontsize:'15px'}" >
+                <router-link to="shanghai/detail" :style="{fontsize:'15px'}" >
                   <span>{{item.content}}</span>
                 </router-link>
                 <div class="progress-style">

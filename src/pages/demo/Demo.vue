@@ -4,7 +4,7 @@
       <div style="padding-top: 24px;padding-left: 24px;padding-right: 24px" v-for="(item,index) in 3" :key="index">
         <a-row :gutter="24" >
           <a-col :span="8">
-            <router-link to="/index/shanghai">
+            <router-link to="/shanghai">
               <a-card hoverable>
                 <img
                     slot="cover"
@@ -54,7 +54,7 @@
                   alt="example"
                   src="./../../assets/show/shanghai.jpeg"
               />
-              <a-card-meta title="上海疫情">
+              <a-card-meta title="安倍晋三">
                 <template slot="description">
                   自3/19起至5/31的74天内，
                   上海全市共计阳性感染者647374人
