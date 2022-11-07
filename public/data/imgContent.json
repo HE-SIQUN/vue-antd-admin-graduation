@@ -1,14 +1,5 @@
-[
-  [{
-    "url": ""
-  },
-    {
-      "url": ""
-    },
-    {
-      "url": ""
-    }
-  ],
-  [],
-  []
-]
+{
+    "url": "require(./../../assets/show/shanghai.jpeg)"
+}
+
+
