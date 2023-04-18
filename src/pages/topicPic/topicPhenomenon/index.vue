@@ -136,7 +136,7 @@ export default {
 
       function randomData() {
 
-        return Math.round(Math.random() * 500);
+        return Math.round(Math.random() * 100);
 
       }
 
@@ -163,7 +163,7 @@ export default {
           top:'70%',
           //改变地图区域颜色
           text: ['积极情绪', '消极情绪'],
-          calculable: true,
+          calculable: false,
           // splitList: [
           //
           //   { start: 500, end: 600 },

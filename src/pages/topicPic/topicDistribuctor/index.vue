@@ -596,7 +596,7 @@ export default {
       resizeMyChartContainer();
 
       var myChart = this.$echarts.init(myChartContainer);
-      var year = ["2022-04-01", "2022-04-05", "2022-04-10", "2022-04-15", "2022-04-20", "2022-04-25","2022-04-30"];
+      var year = ["2022-04-01", "2022-04-03", "2022-04-05", "2022-04-07", "2022-04-09", "2022-04-11","2022-04-14"];
       var mapData = [
         [],
         [],

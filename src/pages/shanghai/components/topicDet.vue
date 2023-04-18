@@ -6,19 +6,13 @@
                     <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="dataA">
         <!--              <div slot="footer"><b>ant design vue</b> footer part</div>-->
                       <a-list-item slot="renderItem" key="item.title" slot-scope="item">
-                        <template v-for="{ type, text } in actions" slot="actions">
+                        <template v-for="{type,text} in item.action" slot="actions">
                         <span :key="type">
                           <a-icon :type="type" style="margin-right: 8px" />
                           {{ text }}
                         </span>
                         </template>
-                        <img v-if="item.image!=''"
-                            slot="extra"
-                            width="172"
-                            height="150"
-                            alt="logo"
-                            :src="item.image"
-                        />
+
 <!--                        <img  v-else src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="">-->
 <!--                        <a-list-item-meta :description="item.description">-->
 <!--                          <a slot="title" :href="item.href">{{ item.title }}</a>-->
@@ -30,7 +24,7 @@
       </a-card>
     </a-col>
     <a-col :sm="24" :md="24" :xl="14" :style="{ marginBottom: '24px' }">
-      <a-card title="话题下发博人地理信息地图展示" :bordered="false" :style="{ marginBottom: '24px' }">
+      <a-card title="话题下发博人签到位置地图展示" :bordered="false" :style="{ marginBottom: '24px' }">
 <!--        <p>地图实例</p>-->
         <template v-slot:extra>
           <a-button type="primary" @click="onButtonClick" >
@@ -79,13 +73,13 @@ export default {
       listData,
       dataA:[],
       pagination: {
-        onChange: page => {
-          console.log(page)
-        },
-        pageSize: 4
+        // onChange: page => {
+        //   // console.log(page)
+        // },
+        pageSize: 6
       },
       actions: [
-        { type: 'star-o', text: '156' },
+        { typea: 'star-o', text: '156' },
         { type: 'like-o', text: '156' },
         { type: 'message', text: '2' }
       ],
@@ -93,7 +87,7 @@ export default {
   },
   methods:{
     mapCreate(){
-      fetch('https://gw.alipayobjects.com/os/antfincdn/xZqmXatMnc/quanguojiaotongshijianxiangyingzhishu.json')
+      fetch('./data/topic_map.json')
           .then((response) => response.json())
           .then((data) => {
             new Dot('map-container', {
@@ -190,7 +184,7 @@ export default {
 
           //改变地图区域颜色
           text: ['积极情绪', '消极情绪'],
-          calculable: true,
+          calculable: false,
           // splitList: [
           //
           //   { start: 500, end: 600 },
@@ -345,8 +339,8 @@ export default {
     },
     async getInitial(){
       const data=await axios.get('./data/huati.json')
-      console.log(data)
-      console.log(data.data)
+      // console.log(data)
+      // console.log(data.data)
       this.dataA=data.data
     }
 

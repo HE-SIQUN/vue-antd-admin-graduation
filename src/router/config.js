@@ -62,7 +62,7 @@ const options = {
                                     meta: {
                                         invisible: true,
                                         page: {
-                                            title: '“上海疫情”关键词详情',
+                                            title: '“上海疫情”事件详情',
                                             breadcrumb: ['首页', '微博相关热点事件', '上海疫情'],
                                         }
                                     }

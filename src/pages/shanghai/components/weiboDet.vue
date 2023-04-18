@@ -3,31 +3,22 @@
     <a-row :gutter="24" >
       <a-col :sm="24" :md="24" :xl="6" :style="{ marginBottom: '24px' }">
         <a-card title="博文内容" :bordered="false" :style="{ marginBottom: '24px',height:'300px'}">
-          <p>上海市疫情防控核酸筛查专班负责人夏科家表示，对于“常态化检测点不接受核酸报告超过72小时”的说法，市防控办没有出台过此类要求，我们已要求各区开展自查，如有个别采样点擅自加码，必须坚决整改。另外需要说明一下，大家出入居住的本社区，不需要提供72小时内核酸阴性证明。但是需要规范佩戴口罩，配合测温，并主动扫出入口的“场所码”，出示“随申码”绿码。</p>
+          <p style="font-size: 18px; font-weight: 700">上海市疫情防控核酸筛查专班负责人夏科家表示，对于“常态化检测点不接受核酸报告超过72小时”的说法，市防控办没有出台过此类要求，我们已要求各区开展自查，如有个别采样点擅自加码，必须坚决整改。另外需要说明一下，大家出入居住的本社区，不需要提供72小时内核酸阴性证明。但是需要规范佩戴口罩，配合测温，并主动扫出入口的“场所码”，出示“随申码”绿码。</p>
         </a-card>
         <a-card title="评论展示内容" :bordered="false" :style="{ marginBottom: '24px',height:'595px'}">
-          <div
-              v-infinite-scroll="handleInfiniteOnLoad"
-              class="demo-infinite-container"
-              :infinite-scroll-disabled="busy"
-              :infinite-scroll-distance="10"
-          >
-            <a-list :data-source="data">
-              <a-list-item slot="renderItem" slot-scope="item">
-                <a-list-item-meta :description="item.email">
-                  <a slot="title" :href="item.href">{{ item.name.last }}</a>
-                  <a-avatar
-                      slot="avatar"
-                      src="https://tvax2.sinaimg.cn/crop.0.0.1080.1080.180/006Hbch4ly8h633iv9z4zj30u00u0q8f.jpg?KID=imgbed,tva&Expires=1666979206&ssig=8y1dE5RnSH "
-                  />
-                </a-list-item-meta>
-                <div>Content</div>
-              </a-list-item>
-              <div v-if="loading && !busy" class="demo-loading-container">
-                <a-spin />
-              </div>
-            </a-list>
-          </div>
+          <a-list item-layout="horizontal" :data-source="data">
+            <a-list-item slot="renderItem" slot-scope="item">
+              <a-list-item-meta
+                  :description="item.content"
+              >
+                <a slot="title" href="https://www.antdv.com/">{{ item.title }}</a>
+                <a-avatar
+                    slot="avatar"
+                    :src="item.avatar"
+                />
+              </a-list-item-meta>
+            </a-list-item>
+          </a-list>
         </a-card>
       </a-col>
       <a-col :sm="24" :md="24" :xl="18" :style="{ marginBottom: '24px' }">
@@ -55,6 +46,43 @@
 </template>
 
 <script>
+const data = [
+  {
+    title: '时尚与古典之间',
+    content:'核酸检测26个小时没出结果的飘过！',
+    avatar:require('./../../../assets/conment/1 (1).jpg')
+  },
+  {
+    title: 'walkingstopping',
+    content:'每周一次怎么够，深圳没疫情都三天一次😂',
+    avatar:require('./../../../assets/conment/1 (2).jpg')
+  },
+  {
+    title: '真杨晓明',
+    content:'坚持就是胜利✌',
+    avatar:require('./../../../assets/conment/1 (3).jpg')
+  },
+  {
+    title: '没有感情的马屁君 ',
+    content:'还在搞啊……',
+    avatar:require('./../../../assets/conment/1 (4).jpg')
+  },
+  {
+    title: 'ALJ821003',
+    content:'浦东加油啊',
+    avatar:require('./../../../assets/conment/1 (5).jpg')
+  },
+  {
+    title: 'ww西西小姐',
+    content:'这是屁话 今天去银行根本不管用',
+    avatar:require('./../../../assets/conment/1 (6).jpg')
+  },
+  {
+    title: '圏圏先生',
+    content:'不管阴性阳性，只要做了核酸就可以出门，这么会玩吗？',
+    avatar:require('./../../../assets/conment/1 (7).jpg')
+  },
+];
 import {mapState} from 'vuex'
 import { Pie } from '@antv/g2plot';
 import { Flow } from '@antv/l7plot';
@@ -68,15 +96,11 @@ export default {
   name: 'TopicDetail',
   data() {
     return {
-      data: [],
-      loading: false,
-      busy: false,
+      data
     }
   },
   beforeMount() {
-    this.fetchData(res => {
-      this.data = res.results;
-    });
+
   },
   methods:{
     mountNode(){
@@ -165,7 +189,7 @@ export default {
 
     },
     forwardMap(){
-      fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
+      fetch('./data/forward_level1.json ')
           .then((response) => response.json())
           .then((data) => {
             new Flow('map123', {
